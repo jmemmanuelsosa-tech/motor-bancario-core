@@ -20,8 +20,14 @@ public class TransferenciaController {
     }
 
     @GetMapping
-    public List<Transferencia> obtenerHistorial() {
-        return transferenciaService.listarHistorial();
+    public ResponseEntity<?> obtenerTransferencias(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        
+        org.springframework.data.domain.Pageable paginacion = 
+            org.springframework.data.domain.PageRequest.of(page, size, org.springframework.data.domain.Sort.by("fecha").descending());
+            
+        return ResponseEntity.ok(transferenciaService.listarHistorial(paginacion));
     }
 
     @PostMapping

@@ -94,7 +94,8 @@ function App() {
       setCuentas(await respCuentas.json());
 
       const respHistorial = await fetch("http://localhost:8080/api/transferencias");
-      setHistorial(await respHistorial.json());
+      const datosPaginados = await respHistorial.json();
+      setHistorial(datosPaginados.content);
     } catch (error) {
       setNotificacionError("Error al sincronizar datos con el servidor.");
     }

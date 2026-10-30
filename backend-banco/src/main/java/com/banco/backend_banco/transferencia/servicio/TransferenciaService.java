@@ -65,7 +65,8 @@ public class TransferenciaService {
         return transferenciaRepository.save(comprobante);
     }
 
-    public List<Transferencia> listarHistorial() {
-        return transferenciaRepository.findAll();
+    
+    public org.springframework.data.domain.Page<Transferencia> listarHistorial(org.springframework.data.domain.Pageable pageable) {
+        return transferenciaRepository.findAll(pageable);
     }
 }
